@@ -25,7 +25,7 @@ class APIEngine {
     }
 
     //Создаем JSON ответа
-    function createDefaultJson() {
+    function createDefaultJson() {	
         $retObject = json_decode('{}');
         $response = APIConstants::$RESPONSE;
         $retObject->$response = json_decode('{}');

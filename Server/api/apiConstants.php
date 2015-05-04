@@ -1,5 +1,9 @@
 <?php
 class APIConstants {
+	public static $db_Name = "Server_DB";
+	public static $db_Host = "localhost";
+	public static $db_User = "root";
+	public static $db_Password = "7896321";
 
     //Результат запроса - параметр в JSON ответе
     public static $RESULT_CODE="resultCode";

@@ -1,5 +1,4 @@
 <?php
-
 class apitest extends apiBaseClass {
 	
 
@@ -27,7 +26,14 @@ class apitest extends apiBaseClass {
         header('Content-type: image/png');
         echo file_get_contents("http://habrahabr.ru/i/error-404-monster.jpg");
     }
-
+	
+	function ReadFromDB(){	
+	    $retJSON = $this->createDefaultJson();			
+		$query = "SELECT name FROM users";		
+		$retJSON = $this->dbExecutor($query);
+		return $retJSON;	
+	}
 }
 
 ?>
+

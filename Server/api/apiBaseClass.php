@@ -17,24 +17,49 @@ class apiBaseClass {
     }
     
     //Создаем дефолтный JSON для ответов
-    function createDefaultJson() {
+    function createDefaultJson() {	
         $retObject = json_decode('{}');
         return $retObject;
     }
-    
-    //Заполняем JSON объект по ответу из MySQLiWorker
-    function fillJSON(&$jsonObject, &$stmt, &$mySQLWorker) {
+	
+	function fillJSON(&$stmt) {
+		$assocArr = array();
+		while($row = mysqli_fetch_assoc($stmt)){
+			$assocArr[] = $row;
+		}
+		return $assocArr;         
+    }
+	
+	function dbExecutor($query){
+		$this->mySQLWorker = MySQLiWorker::getInstance(
+		APIConstants::$db_Name, 
+		APIConstants::$db_Host,
+		APIConstants::$db_User,
+		APIConstants::$db_Password);
+		
+	    $connectLink = $this->mySQLWorker->connectLink;					
+		$stmt = $connectLink->query($query);
+		$res = $this->fillJSON($stmt);
+		$stmt->close();
+		return $res;		
+	}
+
+/* 
+    ///Заполняем JSON объект по ответу из MySQLiWorker
+    function fillJSON(&$jsonObject, &$stmt, &$mySQLWorker) {		
         $row = array();
-        $mySQLWorker->stmt_bind_assoc($stmt, $row);
-        while ($stmt->fetch()) {
+		$res = array();
+		$count = 0;
+        $mySQLWorker->stmt_bind_assoc($stmt, $row); 		
+		while($stmt->fetch()){			
             foreach ($row as $key => $value) {
                 $key = strtolower($key);
-                $jsonObject->$key = $value;
-            }
-            break;
-        }
-        return $jsonObject;
+                $jsonObject->$key = $value;									
+            }  					
+		}    	   	
+		$jsonObject = $res;      
     }
+	*/
 }
 
 ?>

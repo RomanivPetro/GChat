@@ -48,7 +48,7 @@ class MySQLiWorker {
     }
 
     //Соединяемся с базой
-    public function openConnection() {
+    public function openConnection() {	
         if (is_null($this->connectLink)) {
             $this->connectLink = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword, $this->dbName);
             $this->connectLink->query("SET NAMES utf8");
@@ -58,7 +58,7 @@ class MySQLiWorker {
             } else {
                 mysqli_report(MYSQLI_REPORT_ERROR);
             }
-        }
+        }		
         return $this->connectLink;
     }
 
@@ -69,24 +69,20 @@ class MySQLiWorker {
         }
     }
 
-    //Преобразуем ответ в ассоциативный массив
-    public function stmt_bind_assoc(&$stmt, &$out) {
+	/*
+	//Преобразуем ответ в ассоциативный массив
+    public function stmt_bind_assoc(&$stmt, &$out) {		
         $data = mysqli_stmt_result_metadata($stmt);
-        $fields = array();
-        $out = array();
-        $fields[0] = $stmt;
-        $count = 1;
-        $currentTable = '';
-        while ($field = mysqli_fetch_field($data)) {
-            if (strlen($currentTable) == 0) {
-                $currentTable = $field->table;
-            }
-            $fields[$count] = &$out[$field->name];
+        $parameters = array();
+        $out = array();		
+        $parameters[0] = $stmt;		
+        $count = 1; 
+		while ($field = mysqli_fetch_field($data)) {           
+            $parameters[$count] = &$out[$field->name];			
             $count++;
         }
-        call_user_func_array('mysqli_stmt_bind_result', $fields);
-    }
-
+        call_user_func_array('mysqli_stmt_bind_result', $parameters);				      	       
+    }*/
 }
 
 ?>
