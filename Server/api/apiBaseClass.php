@@ -43,6 +43,22 @@ class apiBaseClass {
 		$stmt->close();
 		return $res;		
 	}
+	
+	function dbWriter($query){
+		$this->mySQLWorker = MySQLiWorker::getInstance(
+		APIConstants::$db_Name, 
+		APIConstants::$db_Host,
+		APIConstants::$db_User,
+		APIConstants::$db_Password);
+		$connectLink = $this->mySQLWorker->connectLink;	
+		try{	    				
+		$connectLink->query($query);
+		}
+		catch(Exception $ex){
+			return false;
+		}
+		return true;
+	}
 
 /* 
     ///Заполняем JSON объект по ответу из MySQLiWorker

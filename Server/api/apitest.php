@@ -29,8 +29,15 @@ class apitest extends apiBaseClass {
 	
 	function ReadFromDB(){	
 	    $retJSON = $this->createDefaultJson();			
-		$query = "SELECT name FROM users";		
+		$query = "SELECT name, last_name FROM users";			
 		$retJSON = $this->dbExecutor($query);
+		return $retJSON;	
+	}
+	
+	function WriteToDB(){	
+	    $retJSON = $this->createDefaultJson();			
+		$query = "INSERT INTO users ( id,user_id,name,last_name) VALUES (5,'id845685','Pavlo','Magera')";	
+		$retJSON = $this->dbWriter($query);
 		return $retJSON;	
 	}
 }
