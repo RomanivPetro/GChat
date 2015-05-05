@@ -9,29 +9,4 @@
     android:layout_centerVertical="true"
     android:textSize="26dp"
     android:text="TextView" />
-    <TextView
-        android:id="@+id/txtLong"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textSize="26dp"
-        android:text="TextView"
-        android:layout_gravity="center_vertical" />
-    <TextView
-        android:id="@+id/txtAlt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textSize="26dp"
-        android:text="TextView"
-        android:layout_gravity="center_vertical" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/buttonStart" />
-
 </LinearLayout>

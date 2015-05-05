@@ -26,7 +26,7 @@ class apitest extends apiBaseClass {
         header('Content-type: image/png');
         echo file_get_contents("http://habrahabr.ru/i/error-404-monster.jpg");
     }
-	
+	 //http://gchat.esy.es/api/?apitest.ReadFromDB={}
 	function ReadFromDB(){	
 	    $retJSON = $this->createDefaultJson();			
 		$query = "SELECT name, last_name FROM users";			
@@ -34,6 +34,7 @@ class apitest extends apiBaseClass {
 		return $retJSON;	
 	}
 	
+	//http://gchat.esy.es/api/?apitest.WriteToDB={}
 	function WriteToDB(){	
 	    $retJSON = $this->createDefaultJson();			
 		$query = "INSERT INTO users ( id,user_id,name,last_name) VALUES (5,'id845685','Pavlo','Magera')";	
