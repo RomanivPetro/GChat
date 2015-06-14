@@ -22,14 +22,13 @@ import com.facebook.login.widget.LoginButton;
 
 public class FragmentLoginButton extends Fragment {
     private FragmentManager mFragmentManager;
-
     private TextView mTextDetails;
     private CallbackManager mCallbackManager;
     private AccessTokenTracker mTokenTracker;
     private ProfileTracker mProfileTracker;
     private LoginButton loginButton;
-    public static final String EXTRA_UserName =
-            "com.android.romaniv.gchat.UserName";
+    public static final String EXTRA_UserName = "com.android.romaniv.gchat.UserName";
+    private final String Tag = "GChatFragment";
 
 
     public FragmentLoginButton() {
@@ -38,9 +37,9 @@ public class FragmentLoginButton extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("GChat", "Fragment LoginButton OnCreate");
+        Log.d(Tag, "Fragment LoginButton OnCreate");
         mCallbackManager = CallbackManager.Factory.create();
-        Log.d("GChat", "Fragment LoginButton. CallbackManager.Factory.create ");
+        Log.d(Tag, "Fragment LoginButton. CallbackManager.Factory.create ");
         setupTokenTracker();
         setupProfileTracker();
 
@@ -53,7 +52,7 @@ public class FragmentLoginButton extends Fragment {
             LayoutInflater inflater,
             ViewGroup container,
             Bundle savedInstanceState) {
-        Log.d("GChat", "Fragment LoginButton onCreateView");
+        Log.d(Tag, "Fragment LoginButton onCreateView");
         View view = inflater.inflate(R.layout.fragment_login_button,container,false);
         SetupLoginButton(view);
         SetupTextDetails(view);
@@ -66,12 +65,12 @@ public class FragmentLoginButton extends Fragment {
         super.onResume();
         Profile profile = Profile.getCurrentProfile();
         mTextDetails.setText(constructWelcomeMessage(profile));
-        Log.d("GChat", "Fragment LoginButton onResume");
+        Log.d(Tag, "Fragment LoginButton onResume");
         if(profile != null) {
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, new FragmentMainScreen())
-                .commit();
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainer, new FragmentMainScreen())
+                    .commit();
         }
     }
 
@@ -80,14 +79,14 @@ public class FragmentLoginButton extends Fragment {
         super.onStop();
         mTokenTracker.stopTracking();
         mProfileTracker.stopTracking();
-        Log.d("GChat", "Fragment LoginButton onStop");
+        Log.d(Tag, "Fragment LoginButton onStop");
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
-        Log.d("GChat", "Fragment LoginButton onActivityResult");
+        Log.d(Tag, "Fragment LoginButton onActivityResult");
     }
 
     private void SetupTextDetails(View view) {
@@ -95,7 +94,7 @@ public class FragmentLoginButton extends Fragment {
     }
 
     private void setupTokenTracker() {
-        Log.d("GChat", "Fragment LoginButton. Enter in SetupTokenTracker ");
+        Log.d(Tag, "Fragment LoginButton. Enter in SetupTokenTracker ");
         mTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
@@ -107,7 +106,7 @@ public class FragmentLoginButton extends Fragment {
         mProfileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
-                Log.d("GChat", "Fragment LoginButton. SetupProfileTracker " + currentProfile);
+                Log.d(Tag, "Fragment LoginButton. SetupProfileTracker " + currentProfile);
                 mTextDetails.setText(constructWelcomeMessage(currentProfile));
             }
         };
@@ -131,7 +130,7 @@ public class FragmentLoginButton extends Fragment {
     private FacebookCallback<LoginResult> mFacebookCallback = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
-            Log.d("GChat", "onSuccess in FacebookCallback");
+            Log.d(Tag, "onSuccess in FacebookCallback");
             AccessToken accessToken = loginResult.getAccessToken();
             Profile profile = Profile.getCurrentProfile();
             mTextDetails.setText(constructWelcomeMessage(profile));
@@ -144,12 +143,12 @@ public class FragmentLoginButton extends Fragment {
         @Override
         public void onCancel()
         {
-            Log.d("GChat", "onCancel in FacebookCallback");
+            Log.d(Tag, "onCancel in FacebookCallback");
         }
 
         @Override
         public void onError(FacebookException e) {
-            Log.d("GChat", "onError in FacebookCallback " + e);
+            Log.d(Tag, "onError in FacebookCallback " + e);
         }
     };
 

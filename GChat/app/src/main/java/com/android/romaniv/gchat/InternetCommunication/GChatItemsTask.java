@@ -10,15 +10,31 @@ import com.android.romaniv.gchat.InternetCommunication.GChatHttpFetchr;
  */
 public class GChatItemsTask extends AsyncTask<String, Void, String> {
     public AsyncResponse delegate=null;
+    private String method;
 
     @Override
     protected String doInBackground(String... params) {
+        method = params[0];
         GChatHttpFetchr fetcher = new GChatHttpFetchr();
         return fetcher.fetchItems(params[0],params[1]);
     }
 
     @Override
     protected void onPostExecute(String result) {
-        delegate.processFinish(result);
+        switch (method){
+            case NETConstants.AddNewUser:
+                delegate.AddUserFinish(result);
+                break;
+            case NETConstants.CheckUser:
+                delegate.CheckUserFinish(result);
+                break;
+            case NETConstants.SelectAllUser:
+                delegate.SelectAllUserFinish(result);
+                break;
+            default:
+            delegate.processFinish(result);
+                break;
+        }
+
     }
 }

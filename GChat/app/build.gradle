@@ -27,4 +27,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
+    compile files('libs/quickblox-android-sdk-chat-2.2.3.jar',
+            'libs/quickblox-android-sdk-core-2.2.3.jar',
+            'libs/quickblox-android-sdk-messages-2.2.3.jar',
+            'libs/quickblox-android-sdk-content-2.2.3.jar',
+            'libs/quickblox-android-sdk-customobjects-2.2.3.jar')
 }

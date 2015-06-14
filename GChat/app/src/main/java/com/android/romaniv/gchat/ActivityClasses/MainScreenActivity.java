@@ -85,6 +85,7 @@ public class MainScreenActivity extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void FacebookLogOut(){
         Log.d("GChat", "LogOut");
         FacebookSdk.sdkInitialize(getApplicationContext());
